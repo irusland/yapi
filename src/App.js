@@ -9,7 +9,13 @@ const password = "65e6e91a2c8147acb1c63e18c7800b3b";
 class App extends React.Component {
   getInfo = async (event) => {
     event.preventDefault();
-    const api_url = await fetch(`https://cloud-api.yandex.net/v1/disk/`);
+    const api_url = await fetch(`https://cloud-api.yandex.net/v1/disk/`, {
+      // method: 'POST',
+      // mode: 'no-cors',
+      headers: {
+        'Authorization': `OAuth ${OAuth}`,
+      },
+    });
     const data = await api_url.json();
     console.log(data);
   }
