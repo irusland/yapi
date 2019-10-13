@@ -3,9 +3,9 @@ import React from 'react'
 class Start extends React.Component {
     render() {
         return (
-            <form onSubmit={this.props.get}>
-                <button>Update</button>
-            </form>
+            <div>
+                <button onClick={this.props.getFiles}>Connect</button>
+            </div>
         )
     }
 }
