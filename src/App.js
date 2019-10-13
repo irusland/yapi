@@ -3,8 +3,6 @@ import Start from './components/start'
 import View from './components/view'
 
 const OAuth = "AgAAAAAbvuzgAAXrhsCxoKMQ90LItLm0854HfUo";
-const ID = "5a9a2f163d2c467aa9900ec25d73993f";
-const password = "65e6e91a2c8147acb1c63e18c7800b3b";
 
 class App extends React.Component {
   state = {
@@ -12,14 +10,12 @@ class App extends React.Component {
   }
   getFiles = async (event) => {
     event.preventDefault();
-    const path = '/disk:/';
     const api_url = await fetch(`https://cloud-api.yandex.net/v1/disk/resources/files`, {
       headers: {
         'Authorization': `OAuth ${OAuth}`,
       },
     });
     const answer = await api_url.json();
-    // console.log(answer);
 
     const folder = this.toFolderTree(answer).root.children;
     this.setState({ tree: folder });
@@ -43,7 +39,7 @@ class App extends React.Component {
       let prevProp = levels.shift();
 
       levels.forEach(prop => {
-        if (prevLevel[prevProp] == undefined) {
+        if (prevLevel[prevProp] === undefined) {
           var c = {};
           c['type'] = 'folder';
           c['children'] = {};
@@ -53,7 +49,7 @@ class App extends React.Component {
         prevProp = prop;
       });
 
-      if (prevLevel[prevProp] == undefined) {
+      if (prevLevel[prevProp] === undefined) {
         var c = {};
         c[file] = { type: 'file' }
         prevLevel[prevProp] = { type: 'folder', children: c };
